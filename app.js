@@ -1,24 +1,22 @@
 'use strict';
 
-// ── Recipe data ────────────────────────────────────────────────
-// Each ingredient: { qty: number (per serving), unit, name, prep, group }
-// qty is relative to 1 serving; BASE_SERVINGS is the recipe's default.
+
 const BASE_SERVINGS = 4;
 
 const INGREDIENTS = [
   // Chicken
-  { group: 'Chicken',     qty: 0.25,  unit: '',        name: 'whole chicken',   prep: '~1.8 kg / 4 lb each' },
+  { group: 'Chicken', qty: 0.25, unit: '', name: 'whole chicken', prep: '~1.8 kg / 4 lb each' },
   // Herb butter
-  { group: 'Herb Butter', qty: 15,    unit: 'g',       name: 'unsalted butter', prep: 'softened' },
-  { group: 'Herb Butter', qty: 0.5,   unit: '',        name: 'lemon',           prep: 'zested' },
-  { group: 'Herb Butter', qty: 0.5,   unit: 'cloves',  name: 'garlic',          prep: 'minced' },
-  { group: 'Herb Butter', qty: 0.5,   unit: 'tsp',     name: 'fresh thyme',     prep: 'leaves stripped' },
-  { group: 'Herb Butter', qty: 0.25,  unit: 'tsp',     name: 'flaky sea salt',  prep: '' },
-  { group: 'Herb Butter', qty: 0.125, unit: 'tsp',     name: 'black pepper',    prep: 'freshly ground' },
+  { group: 'Herb Butter', qty: 15, unit: 'g', name: 'unsalted butter', prep: 'softened' },
+  { group: 'Herb Butter', qty: 0.5, unit: '', name: 'lemon', prep: 'zested' },
+  { group: 'Herb Butter', qty: 0.5, unit: 'cloves', name: 'garlic', prep: 'minced' },
+  { group: 'Herb Butter', qty: 0.5, unit: 'tsp', name: 'fresh thyme', prep: 'leaves stripped' },
+  { group: 'Herb Butter', qty: 0.25, unit: 'tsp', name: 'flaky sea salt', prep: '' },
+  { group: 'Herb Butter', qty: 0.125, unit: 'tsp', name: 'black pepper', prep: 'freshly ground' },
   // Cavity
-  { group: 'Cavity',      qty: 0.25,  unit: '',        name: 'lemon',           prep: 'halved' },
-  { group: 'Cavity',      qty: 0.25,  unit: '',        name: 'head of garlic',  prep: 'halved crosswise' },
-  { group: 'Cavity',      qty: 0.5,   unit: 'sprigs',  name: 'fresh thyme',     prep: '' },
+  { group: 'Cavity', qty: 0.25, unit: '', name: 'lemon', prep: 'halved' },
+  { group: 'Cavity', qty: 0.25, unit: '', name: 'head of garlic', prep: 'halved crosswise' },
+  { group: 'Cavity', qty: 0.5, unit: 'sprigs', name: 'fresh thyme', prep: '' },
 ];
 
 // ── Fraction formatting ────────────────────────────────────────
@@ -31,7 +29,7 @@ const FRACTIONS = [
 function formatQty(n) {
   if (n === 0) return '—';
   const whole = Math.floor(n);
-  const frac  = n - whole;
+  const frac = n - whole;
 
   let fracStr = '';
   if (frac > 0.01) {
@@ -67,11 +65,11 @@ function renderIngredients(servings) {
       lastGroup = ing.group;
     }
 
-    const scaledQty  = ing.qty * servings;
+    const scaledQty = ing.qty * servings;
     const displayQty = formatQty(scaledQty);
     const verboseQty = formatQtyVerbose(scaledQty, ing.unit, ing.name);
-    const unit       = ing.unit ? ` ${ing.unit}` : '';
-    const prepSpan   = ing.prep
+    const unit = ing.unit ? ` ${ing.unit}` : '';
+    const prepSpan = ing.prep
       ? `<span class="sr-only">(${ing.prep})</span>`
       : '';
 
@@ -115,7 +113,7 @@ function changeServings(delta) {
 
 function onServingsInput() {
   const input = document.getElementById('servings-input');
-  const val   = parseInt(input.value, 10);
+  const val = parseInt(input.value, 10);
   if (!isNaN(val) && val >= 1 && val <= 99) {
     applyServings(val);
   }
@@ -124,16 +122,16 @@ function onServingsInput() {
 // ── Tab management ─────────────────────────────────────────────
 const TABS = [
   { tab: 'tab-ingredients', panel: 'panel-ingredients' },
-  { tab: 'tab-method',      panel: 'panel-method'      },
+  { tab: 'tab-method', panel: 'panel-method' },
 ];
 
 function selectTab(index) {
   const narrow = window.matchMedia('(max-width: 640px)').matches;
 
   TABS.forEach(({ tab, panel }, i) => {
-    const tabEl   = document.getElementById(tab);
+    const tabEl = document.getElementById(tab);
     const panelEl = document.getElementById(panel);
-    const active  = i === index;
+    const active = i === index;
 
     tabEl.setAttribute('aria-selected', active ? 'true' : 'false');
     tabEl.tabIndex = active ? 0 : -1;
@@ -156,10 +154,10 @@ function initTabs() {
     if (current === -1) return;
 
     let next = current;
-    if      (e.key === 'ArrowRight') next = (current + 1) % TABS.length;
-    else if (e.key === 'ArrowLeft')  next = (current - 1 + TABS.length) % TABS.length;
-    else if (e.key === 'Home')       next = 0;
-    else if (e.key === 'End')        next = TABS.length - 1;
+    if (e.key === 'ArrowRight') next = (current + 1) % TABS.length;
+    else if (e.key === 'ArrowLeft') next = (current - 1 + TABS.length) % TABS.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = TABS.length - 1;
     else return;
 
     e.preventDefault();
@@ -181,7 +179,7 @@ function initTabs() {
 }
 
 // ── Expose handlers to HTML (onclick / oninput attributes) ─────
-window.changeServings  = changeServings;
+window.changeServings = changeServings;
 window.onServingsInput = onServingsInput;
 
 // ── Init ───────────────────────────────────────────────────────

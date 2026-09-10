@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lemon Herb Roast Chicken â€“ Recipe</title>
+  <meta name="description" content="A classic lemon herb roast chicken recipe with adjustable servings. Scale the ingredients to your party size with a single control." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+  <!-- Live announcement region for AT -->
+  <div id="live-region" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <main class="page" id="main">
+
+    <!-- â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <header class="recipe-header">
+      <span class="recipe-kicker">Main Course</span>
+      <h1 class="recipe-title">Lemon Herb Roast Chicken</h1>
+      <div class="recipe-meta" aria-label="Recipe overview">
+        <span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Prep: 20 min
+        </span>
+        <span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.56 2.9A7 7 0 0 1 19 9v4"/><path d="M3 15a3 3 0 0 0 6 0v-2a3 3 0 0 0-6 0z"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
+          Cook: 1 hr 20 min
+        </span>
+        <span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2"/><path d="M18 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z"/></svg>
+          Difficulty: Medium
+        </span>
+      </div>
+      <p class="recipe-description">
+        A golden, butter-basted roast chicken perfumed with lemon zest, fresh thyme, and garlic â€” the kind of Sunday centrepiece that makes the house smell like a proper kitchen.
+      </p>
+    </header>
+
+    <!-- â”€â”€ Servings control â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <section aria-labelledby="servings-heading" class="servings-control">
+      <span class="servings-label" id="servings-heading">Servings</span>
+      <div class="stepper" role="group" aria-labelledby="servings-heading">
+        <button
+          type="button"
+          class="stepper-btn"
+          id="btn-decrease"
+          aria-label="Decrease servings"
+          onclick="changeServings(-1)"
+        >âˆ’</button>
+        <input
+          type="number"
+          class="stepper-input"
+          id="servings-input"
+          value="4"
+          min="1"
+          max="99"
+          aria-label="Number of servings"
+          oninput="onServingsInput()"
+          onchange="onServingsInput()"
+        />
+        <button
+          type="button"
+          class="stepper-btn"
+          id="btn-increase"
+          aria-label="Increase servings"
+          onclick="changeServings(1)"
+        >+</button>
+      </div>
+      <span class="servings-suffix" aria-hidden="true">people</span>
+    </section>
+
+    <!-- â”€â”€ Tab bar (visible on narrow screens only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <div role="tablist" aria-label="Recipe sections" class="tab-bar" id="tab-bar">
+      <div role="presentation"><!-- li is invalid inside tablist -->
+        <button
+          role="tab"
+          class="tab-btn"
+          id="tab-ingredients"
+          aria-controls="panel-ingredients"
+          aria-selected="true"
+          tabindex="0"
+        >Ingredients</button>
+      </div>
+      <div role="presentation">
+        <button
+          role="tab"
+          class="tab-btn"
+          id="tab-method"
+          aria-controls="panel-method"
+          aria-selected="false"
+          tabindex="-1"
+        >Method</button>
+      </div>
+    </div>
+
+    <!-- â”€â”€ Recipe body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <div class="recipe-body">
+
+      <!-- Ingredients panel -->
+      <section
+        class="panel"
+        id="panel-ingredients"
+        role="tabpanel"
+        aria-labelledby="tab-ingredients"
+        tabindex="0"
+      >
+        <h2 class="panel-title">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Ingredients
+        </h2>
+        <ul class="ingredient-list" id="ingredient-list" aria-label="Ingredient list, quantities adjust with servings">
+          <!-- Rendered by JS -->
+        </ul>
+      </section>
+
+      <!-- Method panel -->
+      <section
+        class="panel"
+        id="panel-method"
+        role="tabpanel"
+        aria-labelledby="tab-method"
+        tabindex="0"
+      >
+        <h2 class="panel-title">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Method
+        </h2>
+        <ol class="method-list" aria-label="Step-by-step method">
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <div class="step-body">
+              <p class="step-title">Prepare the herb butter</p>
+              <p class="step-desc">Soften the butter to room temperature. Mix together with lemon zest, minced garlic, fresh thyme leaves, salt, and black pepper until evenly combined.</p>
+            </div>
+          </li>
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <div class="step-body">
+              <p class="step-title">Season the chicken</p>
+              <p class="step-desc">Pat the chicken(s) completely dry with kitchen paper â€” this is the single most important step for crispy skin. Gently lift the breast skin with your fingers and spread half the herb butter directly onto the flesh.</p>
+              <p class="step-tip">
+                <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Tip: Cold butter tears the skin â€” always use room-temperature butter.
+              </p>
+            </div>
+          </li>
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <div class="step-body">
+              <p class="step-title">Stuff and truss</p>
+              <p class="step-desc">Fill each cavity with halved lemon, a head of garlic split across the equator, and a few thyme sprigs. Truss legs together with kitchen twine. Rub remaining herb butter over the outside of the skin.</p>
+            </div>
+          </li>
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <div class="step-body">
+              <p class="step-title">Roast</p>
+              <p class="step-desc">Place breast-side up on a rack in a roasting tin. Roast at 220 Â°C / 425 Â°F for 15 minutes, then reduce to 180 Â°C / 350 Â°F. Continue until the juices run clear (a thermometer inserted into the thickest part of the thigh should read 74 Â°C / 165 Â°F). Allow approximately 20 minutes per 500 g / 1 lb.</p>
+            </div>
+          </li>
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">5</span>
+            <div class="step-body">
+              <p class="step-title">Baste and rest</p>
+              <p class="step-desc">Baste every 30 minutes with the pan juices. Once done, tent loosely with foil and rest for at least 15 minutes before carving â€” this is non-negotiable for juicy meat.</p>
+              <p class="step-tip">
+                <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Tip: Use the resting time to make a quick pan-dripping gravy.
+              </p>
+            </div>
+          </li>
+          <li class="method-step">
+            <span class="step-num" aria-hidden="true">6</span>
+            <div class="step-body">
+              <p class="step-title">Carve and serve</p>
+              <p class="step-desc">Carve and plate alongside your chosen sides. Squeeze the roasted garlic and lemon from the cavity over the carved meat for extra flavour.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+    </div><!-- /.recipe-body -->
+
+    <footer class="recipe-footer">
+      <p>Recipe scales linearly from a base of 4 servings Â· Quantities rounded to the nearest practical fraction</p>
+    </footer>
+
+  </main>
+
+  <script defer src="app.js"></script>
+
+</body>
+</html>
